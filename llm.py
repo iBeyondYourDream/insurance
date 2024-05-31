@@ -119,12 +119,15 @@ if __name__ == "__main__":
     Constructed_Context = f'请你根据一些输入指标，进行车辆出险欺诈检测。我会给出几个例子，请你学习这些例子后回答。\n\n'
     train_sample = df.sample(n=3)
     'items', 'iterrows', 'itertuples',
-    for index,record in train_sample.iterrows():
-        print(index)
-        print('=========\n')
-        print(record)
-        record
-        break
+    for index, (_, record) in enumerate(train_sample.iterrows()):
+        Constructed_Context += f'例{index + 1}：\n【输入变量】：\n'
+        for k, v in record.items():
+            Constructed_Context += f'{k}: {v}, '
+        
+        
+        Constructed_Context += f'【小模型预测标签】：{}\n' \
+                               f'【置信度】：{}\n' \
+                               f'【真实值】：{}\n'
 
 
     for i1 in [1,2,3]:
